@@ -1,13 +1,12 @@
 region_key,region_name
-400,London & South East
-401,Midlands
-402,North West
-403,Yorkshire & Humber
-404,North East
-405,Scotland Central Belt
-406,Scotland North
-407,Wales
-408,Northern Ireland
-409,South West
-410,East of England
-411,National Backbone
+400,Dublin & East
+401,Cork & South
+402,Galway & West
+403,Limerick & Midwest
+404,Waterford & South East
+405,Midlands
+406,North West & Donegal
+407,South West (Kerry/Clare)
+408,Border & Ulster
+409,National Backbone
+410,Core & Data Centres

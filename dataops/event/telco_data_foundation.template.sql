@@ -1,14 +1,14 @@
 -- ============================================================================
--- CityFibre AI Demo - Data Foundation (DataOps Template)
+-- Virgin Media Ireland AI Demo - Data Foundation (DataOps Template)
 -- ============================================================================
--- Description: Creates tables and loads CityFibre UK full fibre infrastructure and commercial data
+-- Description: Creates tables and loads Virgin Media Ireland fibre/entertainment data
 -- Variables: {{ DATABASE_NAME }}, {{ SCHEMA_NAME }}, {{ DATA_STAGE }}
 -- ============================================================================
 
 USE ROLE {{ env.EVENT_ATTENDEE_ROLE | default('TELCO_ANALYST_ROLE') }};
-USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }};
-USE DATABASE {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }};
-USE SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }};
+USE DATABASE {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }};
+USE SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
 -- ============================================================================
 -- Step 1: Create File Format for CSV Files
@@ -37,7 +37,7 @@ CREATE OR REPLACE TABLE product_category_dim (
     category_key INT PRIMARY KEY,
     category_name VARCHAR(100) NOT NULL,
     vertical VARCHAR(50) NOT NULL
-) COMMENT = 'Product categories for CityFibre full fibre services';
+) COMMENT = 'Product categories for Virgin Media Ireland broadband, TV, mobile, and business services';
 
 -- Product Dimension
 CREATE OR REPLACE TABLE product_dim (
@@ -46,7 +46,7 @@ CREATE OR REPLACE TABLE product_dim (
     category_key INT NOT NULL,
     category_name VARCHAR(100),
     vertical VARCHAR(50)
-) COMMENT = 'CityFibre services: full fibre access, ethernet, backhaul, wholesale, smart city';
+) COMMENT = 'Virgin Media Ireland services: broadband, TV, mobile, WiFi guarantee, and business connectivity';
 
 -- Vendor Dimension
 CREATE OR REPLACE TABLE vendor_dim (
@@ -57,7 +57,7 @@ CREATE OR REPLACE TABLE vendor_dim (
     city VARCHAR(100),
     state VARCHAR(10),
     zip VARCHAR(20)
-) COMMENT = 'CityFibre suppliers and partners: construction, network equipment, cloud';
+) COMMENT = 'Virgin Media Ireland suppliers and partners: network build, CPE/WiFi, cloud, and content';
 
 -- Customer Dimension
 CREATE OR REPLACE TABLE customer_dim (
@@ -69,7 +69,7 @@ CREATE OR REPLACE TABLE customer_dim (
     city VARCHAR(100),
     state VARCHAR(10),
     zip VARCHAR(20)
-) COMMENT = 'CityFibre UK customers across residential, business, public sector, and partner verticals';
+) COMMENT = 'Virgin Media Ireland customers across residential, business, public sector, and partner verticals';
 
 -- Account Dimension (Finance)
 CREATE OR REPLACE TABLE account_dim (
@@ -82,20 +82,20 @@ CREATE OR REPLACE TABLE account_dim (
 CREATE OR REPLACE TABLE department_dim (
     department_key INT PRIMARY KEY,
     department_name VARCHAR(100) NOT NULL
-) COMMENT = 'CityFibre organizational departments';
+) COMMENT = 'Virgin Media Ireland organizational departments';
 
 -- Region Dimension
 CREATE OR REPLACE TABLE region_dim (
     region_key INT PRIMARY KEY,
     region_name VARCHAR(100) NOT NULL
-) COMMENT = 'UK regions: London, South East, Scotland, Wales, North West, Yorkshire';
+) COMMENT = 'Ireland regions: Dublin, Cork, Limerick, Galway, Waterford, Midlands, and national backbone';
 
 -- Sales Rep Dimension
 CREATE OR REPLACE TABLE sales_rep_dim (
     sales_rep_key INT PRIMARY KEY,
     rep_name VARCHAR(200) NOT NULL,
     hire_date DATE
-) COMMENT = 'CityFibre sales representatives and channel account managers';
+) COMMENT = 'Virgin Media Ireland sales representatives and channel account managers';
 
 -- Campaign Dimension (Marketing)
 CREATE OR REPLACE TABLE campaign_dim (
@@ -116,32 +116,32 @@ CREATE OR REPLACE TABLE employee_dim (
     employee_name VARCHAR(200) NOT NULL,
     gender VARCHAR(1),
     hire_date DATE
-) COMMENT = 'CityFibre employees for HR analysis';
+) COMMENT = 'Virgin Media Ireland employees for HR analysis';
 
 -- Job Dimension (HR)
 CREATE OR REPLACE TABLE job_dim (
     job_key INT PRIMARY KEY,
     job_title VARCHAR(100) NOT NULL,
     job_level INT
-) COMMENT = 'Job titles and levels within CityFibre';
+) COMMENT = 'Job titles and levels within Virgin Media Ireland';
 
 -- Location Dimension (HR)
 CREATE OR REPLACE TABLE location_dim (
     location_key INT PRIMARY KEY,
     location_name VARCHAR(200) NOT NULL
-) COMMENT = 'CityFibre offices, network hubs, and data centres';
+) COMMENT = 'Virgin Media Ireland offices, network hubs, and data centres';
 
 -- ============================================================================
 -- Step 3: Create Fact Tables
 -- ============================================================================
 
--- CityFibre KPI Reference (demo)
-CREATE OR REPLACE TABLE cityfibre_kpi (
+-- Virgin Media Ireland KPI Reference (demo)
+CREATE OR REPLACE TABLE vmie_kpi (
     metric VARCHAR(200) PRIMARY KEY,
     value NUMBER(18,2),
     as_of_note VARCHAR(200),
     category VARCHAR(50)
-) COMMENT = 'Reference KPIs for CityFibre demo (RFS, take-up, financing, speed)';
+) COMMENT = 'Reference KPIs for Virgin Media Ireland demo (RFS, take-up, financing, speed)';
 
 -- Region RFS and take-up (demo)
 CREATE OR REPLACE TABLE region_rfs_progress (
@@ -156,10 +156,10 @@ CREATE OR REPLACE TABLE region_rfs_progress (
 -- Segment ARPA/ARPU (demo)
 CREATE OR REPLACE TABLE arpu_segment (
     segment VARCHAR(100) PRIMARY KEY,
-    arpa_gbp NUMBER(10,2),
-    arpu_gbp NUMBER(10,2),
+    arpa_eur NUMBER(10,2),
+    arpu_eur NUMBER(10,2),
     as_of_note VARCHAR(100)
-) COMMENT = 'Illustrative ARPA/ARPU by segment for CityFibre demo';
+) COMMENT = 'Illustrative ARPA/ARPU by segment for Virgin Media Ireland demo (euros)';
 
 -- Install lead time by product category (demo)
 CREATE OR REPLACE TABLE install_lead_time (
@@ -168,6 +168,41 @@ CREATE OR REPLACE TABLE install_lead_time (
     p90_install_days INT,
     notes VARCHAR(200)
 ) COMMENT = 'Illustrative install lead times by product category';
+
+-- B2C Customers (demo)
+CREATE OR REPLACE TABLE b2c_customers (
+    customer_id VARCHAR(50) PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    email VARCHAR(200),
+    phone VARCHAR(50),
+    address VARCHAR(200),
+    city VARCHAR(100),
+    county VARCHAR(100),
+    eircode VARCHAR(10),
+    plan_name VARCHAR(200),
+    speed_mbps INT,
+    bundle VARCHAR(100),
+    tv_package VARCHAR(100),
+    wifi_guarantee BOOLEAN,
+    add_ons VARCHAR(200),
+    status VARCHAR(50),
+    region_key INT
+) COMMENT = 'Virgin Media Ireland B2C broadband/TV/mobile customers (demo)';
+
+-- B2C Subscriptions (demo)
+CREATE OR REPLACE TABLE b2c_subscriptions (
+    subscription_id VARCHAR(50) PRIMARY KEY,
+    customer_id VARCHAR(50) REFERENCES b2c_customers(customer_id),
+    product_name VARCHAR(200),
+    category_name VARCHAR(150),
+    start_date DATE,
+    status VARCHAR(50),
+    monthly_fee_eur NUMBER(10,2),
+    tv_package VARCHAR(100),
+    mobile_sims INT,
+    wifi_guarantee BOOLEAN
+) COMMENT = 'Virgin Media Ireland B2C subscriptions with bundle details (demo)';
 
 -- Sales Fact Table
 CREATE OR REPLACE TABLE sales_fact (
@@ -361,9 +396,9 @@ FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/location_dim.
 FILE_FORMAT = CSV_FORMAT
 ON_ERROR = 'CONTINUE';
 
--- Load CityFibre KPI Reference
-COPY INTO cityfibre_kpi
-FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/cityfibre_kpi.csv
+-- Load Virgin Media Ireland KPI Reference
+COPY INTO vmie_kpi
+FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/vmie_kpi.csv
 FILE_FORMAT = CSV_FORMAT
 ON_ERROR = 'CONTINUE';
 
@@ -385,9 +420,21 @@ FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/install_lead_
 FILE_FORMAT = CSV_FORMAT
 ON_ERROR = 'CONTINUE';
 
--- Load CityFibre KPI Reference
-COPY INTO cityfibre_kpi
-FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/cityfibre_kpi.csv
+-- Load B2C Customers
+COPY INTO b2c_customers
+FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/b2c_customers.csv
+FILE_FORMAT = CSV_FORMAT
+ON_ERROR = 'CONTINUE';
+
+-- Load B2C Subscriptions
+COPY INTO b2c_subscriptions
+FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/b2c_subscriptions.csv
+FILE_FORMAT = CSV_FORMAT
+ON_ERROR = 'CONTINUE';
+
+-- Load Virgin Media Ireland KPI Reference
+COPY INTO vmie_kpi
+FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/vmie_kpi.csv
 FILE_FORMAT = CSV_FORMAT
 ON_ERROR = 'CONTINUE';
 
@@ -474,6 +521,8 @@ SELECT '', 'job_dim', COUNT(*) FROM job_dim
 UNION ALL
 SELECT '', 'location_dim', COUNT(*) FROM location_dim
 UNION ALL
+SELECT '', 'b2c_customers', COUNT(*) FROM b2c_customers
+UNION ALL
 SELECT '', '', NULL
 UNION ALL
 SELECT 'FACT TABLES', '', NULL
@@ -486,6 +535,16 @@ SELECT '', 'marketing_campaign_fact', COUNT(*) FROM marketing_campaign_fact
 UNION ALL
 SELECT '', 'hr_employee_fact', COUNT(*) FROM hr_employee_fact
 UNION ALL
+SELECT '', 'region_rfs_progress', COUNT(*) FROM region_rfs_progress
+UNION ALL
+SELECT '', 'arpu_segment', COUNT(*) FROM arpu_segment
+UNION ALL
+SELECT '', 'install_lead_time', COUNT(*) FROM install_lead_time
+UNION ALL
+SELECT '', 'vmie_kpi', COUNT(*) FROM vmie_kpi
+UNION ALL
+SELECT '', 'b2c_subscriptions', COUNT(*) FROM b2c_subscriptions
+UNION ALL
 SELECT '', '', NULL
 UNION ALL
 SELECT 'SALESFORCE TABLES', '', NULL
@@ -497,8 +556,8 @@ UNION ALL
 SELECT '', 'sf_contacts', COUNT(*) FROM sf_contacts;
 
 -- Show all tables
-SHOW TABLES IN SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+SHOW TABLES IN SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
-SELECT 'CityFibre AI Demo data foundation complete!' AS status,
-       '{{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}' AS database_name,
+SELECT 'Virgin Media Ireland AI Demo data foundation complete!' AS status,
+       '{{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}' AS database_name,
        CURRENT_TIMESTAMP() AS loaded_at;

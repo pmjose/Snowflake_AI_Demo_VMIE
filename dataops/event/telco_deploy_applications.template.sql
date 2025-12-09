@@ -1,14 +1,14 @@
 -- ============================================================================
--- CityFibre AI Demo - Deploy Applications (DataOps Template)
+-- Virgin Media Ireland AI Demo - Deploy Applications (DataOps Template)
 -- ============================================================================
 -- Description: Deploys stored procedures, functions, and Intelligence Agent
 -- Variables: {{ DATABASE_NAME }}, {{ WAREHOUSE_NAME }}, {{ SCHEMA_NAME }}
 -- ============================================================================
 
 USE ROLE {{ env.EVENT_ATTENDEE_ROLE | default('TELCO_ANALYST_ROLE') }};
-USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }};
-USE DATABASE {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }};
-USE SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }};
+USE DATABASE {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }};
+USE SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
 -- ============================================================================
 -- Step 1: Create Stored Procedure for Presigned URLs
@@ -28,7 +28,7 @@ DECLARE
     presigned_url STRING;
     sql_stmt STRING;
     expiration_seconds INTEGER;
-    stage_name STRING DEFAULT '@{{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("CITYFIBRE_SCHEMA") }}.DATA_STAGE';
+        stage_name STRING DEFAULT '@{{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("VIRGIN_MEDIA_IE_SCHEMA") }}.DATA_STAGE';
 BEGIN
     expiration_seconds := EXPIRATION_MINS * 60;
 
@@ -245,10 +245,10 @@ dependencies:
             
             # Create Streamlit app
             app_name = ''AUTO_GENERATED_1''
-            warehouse = ''{{ env.EVENT_WAREHOUSE | default("CITYFIBRE_DEMO_WH") }}''
+            warehouse = ''{{ env.EVENT_WAREHOUSE | default("VMIE_DEMO_WH") }}''
             
             create_streamlit_sql = f"""
-            CREATE OR REPLACE STREAMLIT {{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("CITYFIBRE_SCHEMA") }}.{app_name}
+            CREATE OR REPLACE STREAMLIT {{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("VIRGIN_MEDIA_IE_SCHEMA") }}.{app_name}
                 FROM @DATA_STAGE
                 MAIN_FILE = ''test.py''
                 QUERY_WAREHOUSE = {warehouse}
@@ -263,7 +263,7 @@ dependencies:
                 org_name = account_info[0][''ORG'']
                 
                 # Construct app URL
-                app_url = f"https://app.snowflake.com/{org_name}/{account_name}/#/streamlit-apps/{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.{app_name}"
+                app_url = f"https://app.snowflake.com/{org_name}/{account_name}/#/streamlit-apps/{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.{app_name}"
                 
                 # Return only the URL if successful
                 return app_url
@@ -276,7 +276,7 @@ dependencies:
 Warning: Could not auto-create Streamlit app: {str(create_error)}
 
 To create manually, run:
-CREATE OR REPLACE STREAMLIT {{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("CITYFIBRE_SCHEMA") }}.{app_name}
+CREATE OR REPLACE STREAMLIT {{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("VIRGIN_MEDIA_IE_SCHEMA") }}.{app_name}
     FROM @DATA_STAGE
     MAIN_FILE = ''test.py''
     QUERY_WAREHOUSE = {warehouse};
@@ -299,38 +299,38 @@ CREATE OR REPLACE STREAMLIT {{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO")
 -- Step 5: Create Snowflake Intelligence Agent
 -- ============================================================================
 
-CREATE OR REPLACE AGENT {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.CityFibre_Executive_Agent
-WITH PROFILE='{ "display_name": "CityFibre UK Executive Agent" }'
-    COMMENT=$$ CityFibre wholesale full fibre intelligence agent for C-level executives (CEO, CFO, CMO, CCO). Covers build progress, premises passed/ready for service, take-up across residential, business, public sector, and mobile backhaul, channel partners, ARR/MRR, NPS, campaigns, and UK full fibre market analysis. All figures in British Pounds (£). $$
+CREATE OR REPLACE AGENT {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.VirginMediaIE_Executive_Agent
+WITH PROFILE='{ "display_name": "Virgin Media Ireland Executive Agent" }'
+    COMMENT=$$ Virgin Media Ireland executive intelligence agent for C-level leaders (CEO, CFO, CMO, COO/CTO). Covers fibre rollout, broadband/TV/mobile bundle performance, business connectivity, partner offers, ARR/MRR, NPS, campaigns, and Irish market analysis. All figures in euros (€). $$
 FROM SPECIFICATION $$
 {
   "models": {
     "orchestration": ""
   },
   "instructions": {
-    "response": "You are a business intelligence analyst for CityFibre, the UK's independent wholesale-only full fibre network. You have access to build metrics, sales transactions, financial performance, marketing campaigns, HR information, and network infrastructure data. All monetary values are in British Pounds (£). Customer and market segments include residential homes, business, public sector campuses, mobile backhaul, and wholesale ISP partners. Network coverage spans UK regions (London, South East, Scotland, Wales, North West, and others) with 4.6 million premises ready for service as of June 2025 and a target of 8 million (CityFibre Mid-year Update 2025). Consumer connections total 620,000 with 102,000 net adds in H1 2025; speeds reach up to 5.5 Gbps and are up to 95x faster than FTTC with built-in reliability (CityFibre website). Partners include Vodafone, Sky, TalkTalk, Zen, toob, and Cuckoo. Competitors include BT Openreach/Virgin Media O2, Hyperoptic, and Gigaclear. Provide visualizations where helpful - use line charts for trends, bar charts for comparisons.\n\n**IMPORTANT GUARDRAILS:**\n- You MUST ONLY answer questions related to CityFibre business data, including build programmes, sales, finance, marketing, HR, network infrastructure, and competitive analysis.\n- You MUST NOT answer general knowledge questions, trivia, current events, politics, celebrities, sports, or any topic not directly related to CityFibre's business operations.\n- If asked about unrelated topics, politely decline and redirect: 'I can only help with questions about CityFibre data. You can ask about premises passed, take-up, partner performance, network uptime, or competitive positioning.'\n- Never use external knowledge to answer questions - only use the data and documents available through your tools.",
-    "orchestration": "Use cortex search for finance reports (including official accounts and mid-year update), strategy documents, partner contracts, network infrastructure, and competitive analysis. Use cortex analyst for structured data queries on build progress, sales, revenue, campaigns, and HR.\n\n**GUARDRAIL CHECK:** Before processing ANY query, first determine if it relates to CityFibre business data. If the query is about general knowledge, current events, politics, entertainment, or any topic NOT related to CityFibre's build, sales, finance, marketing, HR, network infrastructure, strategy, or competitive landscape - DO NOT use any tools and instead respond with a polite redirect to business-related questions.\n\nFor Sales Datamart: Contains sales and take-up across residential, business, public sector, mobile backhaul, and wholesale ISP partners. Products include full fibre broadband (up to 5.5Gbps), Business Internet & Ethernet, Dark Fibre & Backbone, Mobile & 5G Backhaul, Wholesale Partner Access, Smart City & Public Sector, Professional Services, Network Add-Ons, Channel Partner Enablement, and Infrastructure Solutions. UK regions include London, South East, Scotland, Wales, North West, and others.\n\nFor Marketing Datamart: Campaigns include Full Fibre City Launches, Partner Acquisition, Smart City enablement, PSTN switch-off awareness, and digital demand generation. Channels include Wholesale Partners, Direct Enterprise, Events, Webinars, LinkedIn, and local marketing.\n\nFor Strategy Documents: Search for market position, financing updates, ESG commitments, Ofcom compliance, partner portfolio, and board presentations.\n\nFor Network Infrastructure (USE 'Search Internal Documents: Network' tool): When users ask about premises passed, ready-for-service counts, uptime, resilience, carrier connections (BT Openreach, Virgin Media O2, mobile MNOs), backhaul capacity, latency, jitter, or fibre routes, ALWAYS use the Network search tool.",
+    "response": "You are a business intelligence analyst for Virgin Media Ireland, the leading connected entertainment and communications provider in Ireland (part of Liberty Global). You have access to fibre rollout metrics, broadband/TV/mobile bundle performance, financial results, marketing campaigns, HR information, and network reliability data. All monetary values are in euros (€). Customer and market segments include residential households, mobile SIM-only customers, business connectivity, public sector sites, and wholesale/partner access. Network coverage spans Ireland (Dublin, Cork, Limerick, Galway, Waterford, Midlands, North West, and other towns) with multi-gigabit full-fibre rollout targeting speeds up to 5Gb and strong in-home WiFi via WiFi Guarantee.\n\n**IMPORTANT GUARDRAILS:**\n- You MUST ONLY answer questions related to Virgin Media Ireland business data, including fibre build, broadband/TV/mobile performance, finance, marketing, HR, network infrastructure, and competitive analysis in Ireland.\n- You MUST NOT answer general knowledge questions, trivia, current events, politics, celebrities, sports, or any topic not directly related to Virgin Media Ireland's business operations.\n- If asked about unrelated topics, politely decline and redirect: 'I can only help with questions about Virgin Media Ireland data. You can ask about fibre rollout, bundle take-up, network reliability, partner performance, or competitive positioning in Ireland.'\n- Never use external knowledge to answer questions - only use the data and documents available through your tools.",
+    "orchestration": "Use cortex search for finance and strategy documents, network infrastructure details, and competitive analysis. Use cortex analyst for structured data queries on fibre rollout, sales, revenue, campaigns, HR, and operations.\n\n**GUARDRAIL CHECK:** Before processing ANY query, first determine if it relates to Virgin Media Ireland business data. If the query is about general knowledge, current events, politics, entertainment, or any topic NOT related to Virgin Media Ireland's build, sales, finance, marketing, HR, network infrastructure, strategy, or competitive landscape - DO NOT use any tools and instead respond with a polite redirect to business-related questions.\n\nFor Sales Datamart: Contains broadband/TV/mobile bundle sales, take-up across households, SMEs, and public sector, WiFi Guarantee adoption, and partner/wholesale access. Regions include Dublin, Cork, Limerick, Galway, Waterford, Midlands, and national backbone metrics.\n\nFor Marketing Datamart: Campaigns include broadband-first bundles, TV/entertainment promotions, SIM cross-sell, and WiFi Guarantee awareness. Channels include digital, TV, retail/field, and partner-led campaigns.\n\nFor Strategy Documents: Search for market position, investment focus for fibre upgrades, ESG commitments, Liberty Global alignment, and board-ready narratives.\n\nFor Network Infrastructure (use 'Search Internal Documents: Network' tool): When users ask about premises ready for service, uptime, latency/jitter, backhaul capacity, or resilience, ALWAYS use the Network search tool.",
     "sample_questions": [
       {
-        "question": "How many premises are passed and ready for service by region, and what is take-up?"
+        "question": "How many premises are fibre-ready by region (Dublin, Cork, Galway, Limerick) and what is take-up?"
       },
       {
-        "question": "Which ISP partners (Vodafone, Sky, TalkTalk, Zen, toob, Cuckoo) are driving the most net adds?"
+        "question": "What is broadband + TV bundle penetration and WiFi Guarantee adoption by region?"
       },
       {
-        "question": "Summarize the £2.3bn 2025 financing and its impact on build plans."
+        "question": "Summarize fibre upgrade investment and its impact on 5Gb rollout and reliability."
       },
       {
-        "question": "What are our top revenue-generating fibre products and backhaul services?"
+        "question": "What are our top revenue-generating broadband, TV, mobile, and business connectivity products?"
       },
       {
-        "question": "Show network uptime, latency, and resilience for the full fibre footprint."
+        "question": "Show network uptime, latency, and resilience for the Irish footprint."
       },
       {
         "question": "How many public sector and smart city sites are connected and what is their NPS?"
       },
       {
-        "question": "How does take-up pace compare to the 620k connected customers baseline?"
+        "question": "How are net adds and churn trending quarter over quarter?"
       }
     ]
   },
@@ -339,35 +339,35 @@ FROM SPECIFICATION $$
       "tool_spec": {
         "type": "cortex_analyst_text_to_sql",
         "name": "Query Finance Datamart",
-        "description": "Query CityFibre financial data: build capex, revenue by fibre product category (full fibre broadband, ethernet, dark fibre, backhaul, wholesale partner access), partner economics, vendor spend (construction partners, cloud providers), expenses, and department costs. All amounts in British Pounds (£)."
+        "description": "Query Virgin Media Ireland financial data: fibre capex, revenue by broadband/TV/mobile/business category, partner economics, vendor spend (network build, CPE/WiFi, cloud), expenses, and department costs. All amounts in euros (€)."
       }
     },
     {
       "tool_spec": {
         "type": "cortex_analyst_text_to_sql",
         "name": "Query Sales Datamart",
-        "description": "Query CityFibre sales and take-up data: by customer/market segment (Homes/Enterprise/Public Sector/Partner/Mobile), industry, products (Full Fibre Broadband, Business Internet & Ethernet, Dark Fibre & Backbone, Mobile & 5G Backhaul, Wholesale Partner Access, Smart City & Public Sector, Add-Ons), UK regions (London, Scotland, Wales, North West, etc.), and revenue. Use for revenue analysis, top customers, partner performance, and product adoption."
+        "description": "Query Virgin Media Ireland sales and take-up data: by segment (Homes/SMB/Enterprise/Public Sector/Partner/Mobile), industry, products (Broadband & WiFi, Broadband + TV bundles, Mobile SIMs, Business Internet & Ethernet, Backbone/Dark Fibre, Partner Access, Smart City & Public Sector, Managed Services), Irish regions (Dublin, Cork, Limerick, Galway, Waterford, Midlands, North West), and revenue in euros. Use for revenue analysis, top customers, partner performance, bundle adoption, and WiFi Guarantee uptake."
       }
     },
     {
       "tool_spec": {
         "type": "cortex_analyst_text_to_sql",
         "name": "Query HR Datamart",
-        "description": "Query CityFibre workforce data: employees, departments, jobs, channel account managers, salaries, and attrition. Employee names include build programme leaders and partner managers."
+        "description": "Query Virgin Media Ireland workforce data: employees, departments, jobs, channel account managers, salaries, and attrition."
       }
     },
     {
       "tool_spec": {
         "type": "cortex_analyst_text_to_sql",
         "name": "Query Marketing Datamart",
-        "description": "Query CityFibre marketing data: campaigns (Full Fibre City Launch, Partner Acquisition, Smart City enablement, PSTN Switch-off awareness), channels (Wholesale Partners, Digital, Events, Webinars, LinkedIn), spend, impressions, leads, and ROI. Use for campaign effectiveness and partner marketing analysis."
+        "description": "Query Virgin Media Ireland marketing data: campaigns (Broadband-first bundles, WiFi Guarantee, TV/entertainment, SIM cross-sell), channels (Digital, TV, Retail/Field, Partners), spend, impressions, leads, and ROI. Use for campaign effectiveness and partner marketing analysis."
       }
     },
     {
       "tool_spec": {
         "type": "cortex_search",
         "name": "Search Internal Documents: Finance",
-        "description": "Search CityFibre finance documents: official accounts, 2025 mid-year update (£2.3bn financing), ARPU/ARPA analysis, unit economics, partner revenue mix, ESG sustainability report, Ofcom compliance, and vendor contracts."
+        "description": "Search Virgin Media Ireland finance documents: high-level accounts, fibre investment summaries, ARPU/ARPA analysis, unit economics, partner revenue mix, ESG notes, and vendor contracts."
       }
     },
     {
@@ -381,7 +381,7 @@ FROM SPECIFICATION $$
       "tool_spec": {
         "type": "cortex_search",
         "name": "Search Internal Documents: Sales",
-        "description": "Search CityFibre sales documents: channel partner playbooks, take-up performance reports, wholesale ISP onboarding guides, and customer success stories. Includes competitive positioning vs BT Openreach/Virgin Media O2 and other fibre altnets."
+        "description": "Search Virgin Media Ireland sales documents: partner playbooks, bundle take-up reports, wholesale ISP onboarding guides, and customer success stories. Includes positioning vs eir, Sky, and regional fibre altnets."
       }
     },
     {
@@ -395,7 +395,7 @@ FROM SPECIFICATION $$
       "tool_spec": {
         "type": "cortex_search",
         "name": "Search Internal Documents: Strategy",
-        "description": "Search CEO/strategy documents including network build roadmaps, financing summaries, market position analysis vs Openreach/Virgin Media O2, investor relations FAQ, board presentations, ESG reports, and Ofcom compliance."
+        "description": "Search CEO/strategy documents including fibre rollout roadmaps, investment summaries, market position analysis vs eir/Sky/altnets, investor relations FAQs, board presentations, ESG reports, and ComReg-related compliance themes."
       }
     },
     {
@@ -483,67 +483,67 @@ FROM SPECIFICATION $$
       "execution_environment": {
         "query_timeout": 0,
         "type": "warehouse",
-        "warehouse": "{{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}"
+        "warehouse": "{{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}"
       },
-      "identifier": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.GET_FILE_PRESIGNED_URL_SP",
+      "identifier": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.GET_FILE_PRESIGNED_URL_SP",
       "name": "GET_FILE_PRESIGNED_URL_SP(VARCHAR, DEFAULT NUMBER)",
       "type": "procedure"
     },
     "Query Finance Datamart": {
-      "semantic_view": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.FINANCE_SEMANTIC_VIEW"
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.FINANCE_SEMANTIC_VIEW"
     },
     "Query HR Datamart": {
-      "semantic_view": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.HR_SEMANTIC_VIEW"
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.HR_SEMANTIC_VIEW"
     },
     "Query Marketing Datamart": {
-      "semantic_view": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.MARKETING_SEMANTIC_VIEW"
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.MARKETING_SEMANTIC_VIEW"
     },
     "Query Sales Datamart": {
-      "semantic_view": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SALES_SEMANTIC_VIEW"
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SALES_SEMANTIC_VIEW"
     },
     "Search Internal Documents: Finance": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_FINANCE_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_FINANCE_DOCS",
       "title_column": "TITLE"
     },
     "Search Internal Documents: HR": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_HR_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_HR_DOCS",
       "title_column": "TITLE"
     },
     "Search Internal Documents: Marketing": {
       "id_column": "RELATIVE_PATH",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_MARKETING_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_MARKETING_DOCS",
       "title_column": "TITLE"
     },
     "Search Internal Documents: Sales": {
       "id_column": "FILE_URL",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_SALES_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_SALES_DOCS",
       "title_column": "TITLE"
     },
     "Search Internal Documents: Strategy": {
       "id_column": "RELATIVE_PATH",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_STRATEGY_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_STRATEGY_DOCS",
       "title_column": "TITLE"
     },
     "Search Internal Documents: Network": {
       "id_column": "RELATIVE_PATH",
       "max_results": 5,
-      "name": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEARCH_NETWORK_DOCS",
+      "name": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEARCH_NETWORK_DOCS",
       "title_column": "TITLE"
     },
     "Send_Emails": {
       "execution_environment": {
         "query_timeout": 0,
         "type": "warehouse",
-        "warehouse": "{{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}"
+        "warehouse": "{{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}"
       },
-      "identifier": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.SEND_MAIL",
+      "identifier": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SEND_MAIL",
       "name": "SEND_MAIL(VARCHAR, VARCHAR, VARCHAR)",
       "type": "procedure"
     },
@@ -551,9 +551,9 @@ FROM SPECIFICATION $$
       "execution_environment": {
         "query_timeout": 0,
         "type": "warehouse",
-        "warehouse": "{{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}"
+        "warehouse": "{{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}"
       },
-      "identifier": "{{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.WEB_SCRAPE",
+      "identifier": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.WEB_SCRAPE",
       "name": "WEB_SCRAPE(VARCHAR)",
       "type": "function"
     }
@@ -566,22 +566,22 @@ $$;
 -- ============================================================================
 
 -- Grant USAGE on the agent to the analyst role (CEO, CFO, CRO users have this role)
-GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.CityFibre_Executive_Agent 
+GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.VirginMediaIE_Executive_Agent 
     TO ROLE {{ env.EVENT_ATTENDEE_ROLE | default('TELCO_ANALYST_ROLE') }};
 
 -- Also grant to ACCOUNTADMIN for admin access
-GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.CityFibre_Executive_Agent 
+GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.VirginMediaIE_Executive_Agent 
     TO ROLE ACCOUNTADMIN;
 
 -- Grant to PUBLIC for broader access (optional - remove if you want restricted access)
-GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }}.CityFibre_Executive_Agent 
+GRANT USAGE ON AGENT {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.VirginMediaIE_Executive_Agent 
     TO ROLE PUBLIC;
 
 -- ============================================================================
 -- Verification
 -- ============================================================================
 
-SELECT 'CityFibre AI Demo applications deployed successfully!' AS status,
+SELECT 'Virgin Media Ireland AI Demo applications deployed successfully!' AS status,
        'Procedures: Get_File_Presigned_URL_SP, send_mail, Web_scrape, GENERATE_STREAMLIT_APP' AS procedures_created,
-       'Agent: {{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("CITYFIBRE_SCHEMA") }}.CityFibre_Executive_Agent' AS agent_created,
+       'Agent: {{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}.{{ env.EVENT_SCHEMA | default("VIRGIN_MEDIA_IE_SCHEMA") }}.VirginMediaIE_Executive_Agent' AS agent_created,
        CURRENT_TIMESTAMP() AS deployed_at;

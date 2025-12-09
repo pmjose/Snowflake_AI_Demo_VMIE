@@ -1,0 +1,14 @@
+subscription_id,customer_id,product_name,category_name,start_date,status,monthly_fee_eur,tv_package,mobile_sims,wifi_guarantee
+SUB-IE-1001,CUST-IE-001,Virgin Media Gigabit Broadband,Home Broadband & WiFi,2024-02-10,Active,85.00,Virgin TV 360,0,true
+SUB-IE-1002,CUST-IE-002,Virgin Media Fibre Broadband 500Mb,Home Broadband & WiFi,2023-11-22,Active,70.00,None,0,true
+SUB-IE-1003,CUST-IE-003,Virgin Media Fibre Broadband 250Mb,Home Broadband & WiFi,2024-05-15,Active,55.00,Virgin TV 360,0,false
+SUB-IE-1004,CUST-IE-004,Virgin Media Gigabit Broadband,Home Broadband & WiFi,2024-01-05,Active,95.00,Virgin TV 360,1,true
+SUB-IE-1005,CUST-IE-005,Virgin Media Fibre Broadband 500Mb,Home Broadband & WiFi,2023-09-18,Active,75.00,None,1,true
+SUB-IE-1006,CUST-IE-006,Virgin Media Fibre Broadband 250Mb,Home Broadband & WiFi,2023-10-02,Active,50.00,None,0,false
+SUB-IE-1007,CUST-IE-007,Virgin Media Gigabit Broadband,Home Broadband & WiFi,2024-03-27,Active,89.00,Virgin TV 360,0,true
+SUB-IE-1008,CUST-IE-008,Virgin Media Fibre Broadband 500Mb,Home Broadband & WiFi,2023-12-11,Active,72.00,None,0,true
+SUB-IE-1009,CUST-IE-009,Virgin Media Fibre Broadband 250Mb,Home Broadband & WiFi,2024-04-30,Active,57.00,Virgin TV 360,0,false
+SUB-IE-1010,CUST-IE-010,Virgin Media Fibre Broadband 500Mb,Home Broadband & WiFi,2024-02-21,Active,73.00,None,1,true
+SUB-IE-1011,CUST-IE-011,Virgin Media Gigabit Broadband,Home Broadband & WiFi,2024-06-06,Active,99.00,Virgin TV 360,2,true
+SUB-IE-1012,CUST-IE-012,Virgin Media Fibre Broadband 250Mb,Home Broadband & WiFi,2024-01-30,Active,52.00,None,0,false
+

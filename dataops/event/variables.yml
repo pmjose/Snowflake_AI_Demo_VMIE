@@ -1,15 +1,15 @@
 # ============================================================================
-# CityFibre AI Demo - DataOps Event Variables Configuration
+# Virgin Media Ireland AI Demo - DataOps Event Variables Configuration
 # ============================================================================
 # Description: Event-specific variables for DataOps.live pipeline deployment
 # Usage: Referenced by pipeline YAMLs and *.template.sql files
 # Naming Convention: Use EVENT_ prefix for all event-specific variables
-# Demo: CityFibre UK full fibre infrastructure across residential, business, public sector, and mobile backhaul
+# Demo: Virgin Media Ireland Irish fibre broadband infrastructure across residential, business, public sector, and mobile backhaul
 # ============================================================================
 
 variables:
   # Event Metadata
-  EVENT_NAME: "CityFibre AI Demo - Full Fibre Intelligence"
+  EVENT_NAME: "Virgin Media Ireland AI Demo - Full Fibre Intelligence"
   EVENT_TYPE: "cityfibre_demo"
   EVENT_DATE: "2025-12-09"
   EVENT_DEPLOY_TELCO: "true"
@@ -63,7 +63,7 @@ variables:
   EVENT_NOTEBOOK_STAGE: "NOTEBOOK_STAGE"
   EVENT_STREAMLIT_STAGE: "STREAMLIT_STAGE"
 
-  # CityFibre Demo Data Model Info (for reference)
+  # Virgin Media Ireland Demo Data Model Info (for reference)
   # Dimension Tables: product_category_dim, product_dim, vendor_dim, customer_dim,
   #                   account_dim, department_dim, region_dim, sales_rep_dim,
   #                   campaign_dim, channel_dim, employee_dim, job_dim, location_dim
@@ -72,5 +72,5 @@ variables:
   # Semantic Views: FINANCE_SEMANTIC_VIEW, SALES_SEMANTIC_VIEW, MARKETING_SEMANTIC_VIEW, HR_SEMANTIC_VIEW
   # Search Services: Search_finance_docs, Search_hr_docs, Search_marketing_docs,
   #                  Search_sales_docs, Search_strategy_docs, Search_demo_docs, Search_network_docs
-  # Intelligence Agent: CityFibre_Executive_Agent
+  # Intelligence Agent: Virgin Media Ireland_Executive_Agent
 

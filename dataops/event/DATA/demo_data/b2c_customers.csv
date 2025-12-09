@@ -1,0 +1,14 @@
+customer_id,first_name,last_name,email,phone,address,city,county,eircode,plan_name,speed_mbps,bundle,tv_package,wifi_guarantee,add_ons,status,region_key
+CUST-IE-001,Aoife,Murphy,aoife.murphy@example.ie,0831234567,12 Grand Canal Dock,Dublin,Dublin,D02 X0X0,Virgin Media Gigabit Broadband,1000,Broadband + TV,Virgin TV 360,Yes,WiFi Pods;Multiroom TV,Active,400
+CUST-IE-002,Sean,O'Brien,sean.obrien@example.ie,0857654321,4 Blackrock Mews,Dublin,Dublin,A94 X1X1,Virgin Media Fibre Broadband 500Mb,500,Broadband Only,None,Yes,WiFi Pods,Active,400
+CUST-IE-003,Niamh,Walsh,niamh.walsh@example.ie,0865550101,22 Shandon Street,Cork,Cork,T12 X2X2,Virgin Media Fibre Broadband 250Mb,250,Broadband + TV,Virgin TV 360,No,None,Active,401
+CUST-IE-004,Cian,Byrne,cian.byrne@example.ie,0839898989,18 Spanish Parade,Galway,Galway,H91 X3X3,Virgin Media Gigabit Broadband,1000,Broadband + TV + Mobile,Virgin TV 360,Yes,WiFi Pods;Multiroom TV;Unlimited 5G SIM,Active,402
+CUST-IE-005,Orla,Kelly,orla.kelly@example.ie,0872223333,7 Ennis Road,Limerick,Limerick,V94 X4X4,Virgin Media Fibre Broadband 500Mb,500,Broadband + Mobile,None,Yes,Unlimited 5G SIM,Active,403
+CUST-IE-006,Patrick,Doyle,patrick.doyle@example.ie,0851112222,11 Dunmore Road,Waterford,Waterford,X91 X5X5,Virgin Media Fibre Broadband 250Mb,250,Broadband Only,None,No,None,Active,404
+CUST-IE-007,Sarah,Healy,sarah.healy@example.ie,0867778888,9 Athlone Quay,Athlone,Westmeath,N37 X6X6,Virgin Media Gigabit Broadband,1000,Broadband + TV,Virgin TV 360,Yes,WiFi Pods;Multiroom TV,Active,405
+CUST-IE-008,Eoin,Ryan,eoin.ryan@example.ie,0834445555,15 Letterkenny Road,Letterkenny,Donegal,F92 X7X7,Virgin Media Fibre Broadband 500Mb,500,Broadband Only,None,Yes,WiFi Pods,Active,406
+CUST-IE-009,Maeve,Nolan,maeve.nolan@example.ie,0879990000,6 Tralee Road,Tralee,Kerry,V92 X8X8,Virgin Media Fibre Broadband 250Mb,250,Broadband + TV,Virgin TV 360,No,None,Active,407
+CUST-IE-010,Conor,McCarthy,conor.mccarthy@example.ie,0853334444,20 Drogheda Street,Drogheda,Louth,A92 X9X9,Virgin Media Fibre Broadband 500Mb,500,Broadband + Mobile,None,Yes,Unlimited 5G SIM,Active,408
+CUST-IE-011,Aisling,Fitzgerald,aisling.fitzgerald@example.ie,0861212121,3 Portlaoise Crescent,Portlaoise,Laois,R32 X0Y0,Virgin Media Gigabit Broadband,1000,Broadband + TV + Mobile,Virgin TV 360,Yes,WiFi Pods;Multiroom TV;Unlimited 5G SIM,Active,405
+CUST-IE-012,Luke,Power,luke.power@example.ie,0875656565,27 Wexford Quay,Wexford,Wexford,Y35 X1Y1,Virgin Media Fibre Broadband 250Mb,250,Broadband Only,None,No,None,Active,404
+

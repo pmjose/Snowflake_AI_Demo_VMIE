@@ -160,7 +160,7 @@ This notebook provides hands-on exercises with Cortex AI functions.
 - Ensure compliance with privacy regulations
 
 **Exercise 10: Custom Analysis**
-- Search for competitor mentions (Maxis, U Mobile)
+- Search for competitor mentions (eir, Sky, Vodafone/Three/SIRO, Digiweb)
 - Analyze call reasons and resolution status
 - Write your own queries
 

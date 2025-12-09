@@ -1,0 +1,9 @@
+metric,value,as_of_note,category
+Premises_Ready_For_Service,1000000,June 2025 (illustrative),network
+Premises_Target,1500000,2026 fibre build target (illustrative),network
+Broadband_Customers,400000,Estimated 2025 base (illustrative),sales
+Net_Adds_H1_2025,45000,Mid-year net adds (illustrative),sales
+Financing_Raised_EUR,500000000,Illustrative fibre investment,finance
+Top_Speed_Mbps,5000,Full-fibre headline speed,product
+WiFi_Guarantee_Coverage_Pct,82,Customers with mesh/WiFi guarantee (illustrative),product
+

@@ -1,14 +1,14 @@
 -- ============================================================================
--- CityFibre AI Demo - Cortex Search Services (DataOps Template)
+-- Virgin Media Ireland AI Demo - Cortex Search Services (DataOps Template)
 -- ============================================================================
 -- Description: Parses unstructured documents and creates Cortex Search services
 -- for semantic search over finance, HR, marketing, sales, strategy, demo, and network docs
 -- ============================================================================
 
 USE ROLE {{ env.EVENT_ATTENDEE_ROLE | default('TELCO_ANALYST_ROLE') }};
-USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }};
-USE DATABASE {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }};
-USE SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }};
+USE DATABASE {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }};
+USE SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
 -- ============================================================================
 -- Step 1: Parse Unstructured Documents (PDF, DOCX, PPTX, MD)
@@ -72,7 +72,7 @@ ORDER BY file_count DESC;
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_finance_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -89,7 +89,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_finance_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_hr_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -106,7 +106,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_hr_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_marketing_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -123,7 +123,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_marketing_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_sales_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -140,7 +140,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_sales_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_strategy_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -157,7 +157,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_strategy_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_demo_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (
@@ -174,7 +174,7 @@ CREATE OR REPLACE CORTEX SEARCH SERVICE Search_demo_docs
 CREATE OR REPLACE CORTEX SEARCH SERVICE Search_network_docs
     ON content
     ATTRIBUTES relative_path, file_url, title
-    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }}
+    WAREHOUSE = {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }}
     TARGET_LAG = '30 day'
     EMBEDDING_MODEL = 'snowflake-arctic-embed-l-v2.0'
     AS (

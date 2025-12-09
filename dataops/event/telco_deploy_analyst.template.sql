@@ -1,5 +1,5 @@
 -- ============================================================================
--- CityFibre AI Demo - Semantic Views for Cortex Analyst (DataOps Template)
+-- Virgin Media Ireland AI Demo - Semantic Views for Cortex Analyst (DataOps Template)
 -- ============================================================================
 -- Description: Creates business unit-specific semantic views for natural language queries
 -- Based on: https://docs.snowflake.com/en/user-guide/views-semantic/sql
@@ -7,9 +7,9 @@
 
 -- Use ACCOUNTADMIN to own semantic views (allows editing in Snowsight)
 USE ROLE ACCOUNTADMIN;
-USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }};
-USE DATABASE {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }};
-USE SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }};
+USE DATABASE {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }};
+USE SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
 -- ============================================================================
 -- FINANCE SEMANTIC VIEW
@@ -32,7 +32,7 @@ CREATE OR REPLACE SEMANTIC VIEW FINANCE_SEMANTIC_VIEW
         TRANSACTIONS_TO_CUSTOMERS as TRANSACTIONS(CUSTOMER_KEY) references CUSTOMERS(CUSTOMER_KEY)
     )
     facts (
-        TRANSACTIONS.TRANSACTION_AMOUNT as amount comment='Transaction amount in pounds',
+        TRANSACTIONS.TRANSACTION_AMOUNT as amount comment='Transaction amount in euros',
         TRANSACTIONS.TRANSACTION_RECORD as 1 comment='Count of transactions'
     )
     dimensions (
@@ -84,7 +84,7 @@ CREATE OR REPLACE SEMANTIC VIEW SALES_SEMANTIC_VIEW
     SALES_TO_VENDORS as SALES(VENDOR_KEY) references VENDORS(VENDOR_KEY)
   )
   facts (
-    SALES.SALE_AMOUNT as amount comment='Sale amount in pounds',
+    SALES.SALE_AMOUNT as amount comment='Sale amount in euros',
     SALES.SALE_RECORD as 1 comment='Count of sales transactions',
     SALES.UNITS_SOLD as units comment='Number of units sold'
   )
@@ -121,8 +121,8 @@ CREATE OR REPLACE SEMANTIC VIEW SALES_SEMANTIC_VIEW
     SALES.TOTAL_REVENUE as SUM(sales.amount) comment='Total sales revenue',
     SALES.TOTAL_UNITS as SUM(sales.units) comment='Total units sold'
   )
-  comment='Semantic view for CityFibre full fibre sales analysis'
-  with extension (CA='{"tables":[{"name":"CUSTOMERS","dimensions":[{"name":"CUSTOMER_KEY"},{"name":"CUSTOMER_NAME","sample_values":["Harrison Martin Ltd","Lee Turner Solutions","Williams Hill UK"]},{"name":"INDUSTRY","sample_values":["Healthcare","Manufacturing","Financial Services","Technology","Legal Services","Education","Hospitality"]}]},{"name":"PRODUCTS","dimensions":[{"name":"CATEGORY_KEY","unique":false},{"name":"PRODUCT_KEY"},{"name":"PRODUCT_NAME","sample_values":["CityFibre Full Fibre 1G","Business Fibre DIA 10G","Metro Dark Fibre Pair","Small Cell Backhaul","Data Centre Connect London"]}]},{"name":"PRODUCT_CATEGORY_DIM","dimensions":[{"name":"CATEGORY_KEY","sample_values":["1","2","3","4","5","6","7","8","9","10"]},{"name":"CATEGORY_NAME","sample_values":["Full Fibre Broadband","Business Internet & Ethernet","Dark Fibre & Backbone","Mobile & 5G Backhaul","Wholesale Partner Access","Smart City & Public Sector","Professional Services","Network Add-Ons","Channel Partner Enablement","Infrastructure Solutions"]},{"name":"VERTICAL","sample_values":["Homes","Enterprise","Public Sector","Partner","Mobile","All"]}]},{"name":"REGIONS","dimensions":[{"name":"REGION_KEY"},{"name":"REGION_NAME","sample_values":["London","South East","Scotland","Wales","North West","Yorkshire"]}]},{"name":"SALES","dimensions":[{"name":"CUSTOMER_KEY"},{"name":"PRODUCT_KEY"},{"name":"REGION_KEY"},{"name":"SALES_REP_KEY"},{"name":"SALE_DATE","sample_values":["2024-01-01","2024-06-15","2024-12-01"]},{"name":"SALE_ID"},{"name":"SALE_MONTH"},{"name":"SALE_YEAR"},{"name":"VENDOR_KEY"}],"facts":[{"name":"SALE_AMOUNT"},{"name":"SALE_RECORD"},{"name":"UNITS_SOLD"}],"metrics":[{"name":"AVERAGE_DEAL_SIZE"},{"name":"AVERAGE_UNITS_PER_SALE"},{"name":"TOTAL_DEALS"},{"name":"TOTAL_REVENUE"},{"name":"TOTAL_UNITS"}]},{"name":"SALES_REPS","dimensions":[{"name":"SALES_REP_KEY"},{"name":"SALES_REP_NAME","sample_values":["Daniel Jones","Luna Anderson","Charlotte Scott"]}]},{"name":"VENDORS","dimensions":[{"name":"VENDOR_KEY"},{"name":"VENDOR_NAME","sample_values":["Construction Partner A","Cisco UK","Amazon Web Services UK","BT Openreach","Virgin Media O2"]}]}],"relationships":[{"name":"PRODUCT_TO_CATEGORY"},{"name":"SALES_TO_CUSTOMERS","relationship_type":"many_to_one"},{"name":"SALES_TO_PRODUCTS","relationship_type":"many_to_one"},{"name":"SALES_TO_REGIONS","relationship_type":"many_to_one"},{"name":"SALES_TO_REPS","relationship_type":"many_to_one"},{"name":"SALES_TO_VENDORS","relationship_type":"many_to_one"}]}');
+  comment='Semantic view for Virgin Media Ireland broadband/TV/mobile sales analysis'
+  with extension (CA='{"tables":[{"name":"CUSTOMERS","dimensions":[{"name":"CUSTOMER_KEY"},{"name":"CUSTOMER_NAME","sample_values":["Murphy Communications Ltd","OBrien Retail Group","Galway Digital Services"]},{"name":"INDUSTRY","sample_values":["Healthcare","Manufacturing","Financial Services","Technology","Legal Services","Education","Hospitality"]}]},{"name":"PRODUCTS","dimensions":[{"name":"CATEGORY_KEY","unique":false},{"name":"PRODUCT_KEY"},{"name":"PRODUCT_NAME","sample_values":["Virgin Media Ireland Broadband 1G","Business Internet 10G","Metro Dark Fibre Pair","Small Cell Backhaul","Data Centre Connect Dublin"]}]},{"name":"PRODUCT_CATEGORY_DIM","dimensions":[{"name":"CATEGORY_KEY","sample_values":["1","2","3","4","5","6","7","8","9","10"]},{"name":"CATEGORY_NAME","sample_values":["Home Broadband & WiFi","Business Internet & Ethernet","Backbone & Dark Fibre","Mobile & Backhaul","Wholesale & Partner Access","Smart City & Public Sector","Professional & Managed Services","Managed WiFi & Security","Channel Partner Enablement","Cloud & Data Centre Access"]},{"name":"VERTICAL","sample_values":["Homes","Enterprise","Public Sector","Partner","Mobile","All"]}]},{"name":"REGIONS","dimensions":[{"name":"REGION_KEY"},{"name":"REGION_NAME","sample_values":["Dublin & East","Cork & South","Galway & West","Limerick & Midwest","Waterford & South East","Midlands"]}]},{"name":"SALES","dimensions":[{"name":"CUSTOMER_KEY"},{"name":"PRODUCT_KEY"},{"name":"REGION_KEY"},{"name":"SALES_REP_KEY"},{"name":"SALE_DATE","sample_values":["2024-01-01","2024-06-15","2024-12-01"]},{"name":"SALE_ID"},{"name":"SALE_MONTH"},{"name":"SALE_YEAR"},{"name":"VENDOR_KEY"}],"facts":[{"name":"SALE_AMOUNT"},{"name":"SALE_RECORD"},{"name":"UNITS_SOLD"}],"metrics":[{"name":"AVERAGE_DEAL_SIZE"},{"name":"AVERAGE_UNITS_PER_SALE"},{"name":"TOTAL_DEALS"},{"name":"TOTAL_REVENUE"},{"name":"TOTAL_UNITS"}]},{"name":"SALES_REPS","dimensions":[{"name":"SALES_REP_KEY"},{"name":"SALES_REP_NAME","sample_values":["Daniel Jones","Luna Anderson","Charlotte Scott"]}]},{"name":"VENDORS","dimensions":[{"name":"VENDOR_KEY"},{"name":"VENDOR_NAME","sample_values":["Construction Partner A","Cisco Ireland","Amazon Web Services Ireland","Open Eir","Sky Ireland"]}]}],"relationships":[{"name":"PRODUCT_TO_CATEGORY"},{"name":"SALES_TO_CUSTOMERS","relationship_type":"many_to_one"},{"name":"SALES_TO_PRODUCTS","relationship_type":"many_to_one"},{"name":"SALES_TO_REGIONS","relationship_type":"many_to_one"},{"name":"SALES_TO_REPS","relationship_type":"many_to_one"},{"name":"SALES_TO_VENDORS","relationship_type":"many_to_one"}]}');
 
 -- ============================================================================
 -- MARKETING SEMANTIC VIEW
@@ -153,12 +153,12 @@ CREATE OR REPLACE SEMANTIC VIEW MARKETING_SEMANTIC_VIEW
   )
   facts (
     PUBLIC CAMPAIGNS.CAMPAIGN_RECORD as 1 comment='Count of campaign activities',
-    PUBLIC CAMPAIGNS.CAMPAIGN_SPEND as spend comment='Marketing spend in pounds',
+    PUBLIC CAMPAIGNS.CAMPAIGN_SPEND as spend comment='Marketing spend in euros',
     PUBLIC CAMPAIGNS.IMPRESSIONS as IMPRESSIONS comment='Number of impressions',
     PUBLIC CAMPAIGNS.LEADS_GENERATED as LEADS_GENERATED comment='Number of leads generated',
     PUBLIC CONTACTS.CONTACT_RECORD as 1 comment='Count of contacts generated',
     PUBLIC OPPORTUNITIES.OPPORTUNITY_RECORD as 1 comment='Count of opportunities created',
-    PUBLIC OPPORTUNITIES.REVENUE as AMOUNT comment='Opportunity revenue in pounds'
+    PUBLIC OPPORTUNITIES.REVENUE as AMOUNT comment='Opportunity revenue in euros'
   )
   dimensions (
     PUBLIC ACCOUNTS.ACCOUNT_ID as ACCOUNT_ID,
@@ -243,7 +243,7 @@ CREATE OR REPLACE SEMANTIC VIEW HR_SEMANTIC_VIEW
   facts (
     HR_RECORDS.ATTRITION_FLAG as attrition_flag with synonyms=('turnover_indicator','employee_departure_flag','separation_flag','employee_retention_status','churn_status','employee_exit_indicator') comment='Attrition flag. value is 0 if employee is currently active. 1 if employee quit & left the company. Always filter by 0 to show active employees unless specified otherwise',
     HR_RECORDS.EMPLOYEE_RECORD as 1 comment='Count of employee records',
-    HR_RECORDS.EMPLOYEE_SALARY as salary comment='Employee salary in pounds'
+    HR_RECORDS.EMPLOYEE_SALARY as salary comment='Employee salary in euros'
   )
   dimensions (
     DEPARTMENTS.DEPARTMENT_KEY as DEPARTMENT_KEY,

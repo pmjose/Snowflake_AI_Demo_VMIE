@@ -1,20 +1,20 @@
 -- ============================================================================
--- CityFibre AI Demo - Upload Files to Stages (DataOps Template)
+-- Virgin Media Ireland AI Demo - Upload Files to Stages (DataOps Template)
 -- ============================================================================
 -- Description: Uploads CSV data files and unstructured documents to stages
 -- Variables: {{ DATABASE_NAME }}, {{ WAREHOUSE_NAME }}, {{ SCHEMA_NAME }}
 -- ============================================================================
 
 USE ROLE {{ env.EVENT_ATTENDEE_ROLE | default('TELCO_ANALYST_ROLE') }};
-USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('CITYFIBRE_DEMO_WH') }};
-USE DATABASE {{ env.EVENT_DATABASE | default('CITYFIBRE_AI_DEMO') }};
-USE SCHEMA {{ env.EVENT_SCHEMA | default('CITYFIBRE_SCHEMA') }};
+USE WAREHOUSE {{ env.EVENT_WAREHOUSE | default('VMIE_DEMO_WH') }};
+USE DATABASE {{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }};
+USE SCHEMA {{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }};
 
 -- ============================================================================
 -- Step 1: Upload CSV Data Files to DATA_STAGE/demo_data/
 -- ============================================================================
 
--- Upload all CityFibre demo CSV data files (dimensions, facts, salesforce tables)
+-- Upload all Virgin Media Ireland demo CSV data files (dimensions, facts, salesforce tables)
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/account_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/campaign_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/channel_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
@@ -28,7 +28,7 @@ PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/location_dim.c
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/marketing_campaign_fact.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/product_category_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/product_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
-PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/cityfibre_kpi.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/vmie_kpi.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/region_rfs_progress.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/arpu_segment.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/install_lead_time.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
@@ -38,14 +38,15 @@ PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sales_rep_dim.
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sf_accounts.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sf_contacts.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sf_opportunities.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/b2c_customers.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/b2c_subscriptions.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/vendor_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 
 -- ============================================================================
--- Step 2: Upload CityFibre Unstructured Documents to DATA_STAGE/unstructured_docs/
--- (Only CityFibre-branded docs are uploaded)
+-- Step 2: Upload Virgin Media Ireland Unstructured Documents to DATA_STAGE/unstructured_docs/
 -- ============================================================================
 
--- Upload CityFibre finance/strategy/network/sales/marketing/HR docs (markdown)
+-- Upload Virgin Media Ireland finance/strategy/network/sales/marketing/HR docs (markdown)
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/finance/*.md' @DATA_STAGE/unstructured_docs/finance/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=4;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/strategy/*.md' @DATA_STAGE/unstructured_docs/strategy/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=4;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/network/*.md' @DATA_STAGE/unstructured_docs/network/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=4;
@@ -54,9 +55,10 @@ PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/market
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/hr/*.md' @DATA_STAGE/unstructured_docs/hr/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=4;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/unstructured_docs/demo/*.md' @DATA_STAGE/unstructured_docs/demo/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE PARALLEL=4;
 
--- Upload official CityFibre reports (PDF)
-PUT 'file://{{ env.CI_PROJECT_DIR }}/reports/CFIH-Group-2024-Accounts.pdf' @DATA_STAGE/unstructured_docs/finance/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
-PUT 'file://{{ env.CI_PROJECT_DIR }}/reports/CityFibre-Mid-year-update.pdf' @DATA_STAGE/unstructured_docs/strategy/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+-- Optional: upload Virgin Media Ireland / Liberty Global reports (provide your own files)
+-- Example:
+-- PUT 'file://{{ env.CI_PROJECT_DIR }}/reports/VirginMediaIreland-Annual-Report.pdf' @DATA_STAGE/unstructured_docs/finance/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+-- PUT 'file://{{ env.CI_PROJECT_DIR }}/reports/LibertyGlobal-Investor-Update.pdf' @DATA_STAGE/unstructured_docs/strategy/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 
 -- ============================================================================
 -- Step 3: Refresh Stage Metadata (for Directory Tables)
@@ -99,5 +101,5 @@ ORDER BY folder;
 -- ============================================================================
 
 SELECT 'File upload complete!' AS status,
-       '{{ env.EVENT_DATABASE | default("CITYFIBRE_AI_DEMO") }}' AS database_name,
+       '{{ env.EVENT_DATABASE | default("VIRGIN_MEDIA_IE_AI_DEMO") }}' AS database_name,
        CURRENT_TIMESTAMP() AS uploaded_at;

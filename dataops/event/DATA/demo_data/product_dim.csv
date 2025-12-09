@@ -1,65 +1,65 @@
 product_key,product_name,category_key,category_name,vertical
-1,CityFibre Full Fibre 500,1,Full Fibre Broadband,Homes
-2,CityFibre Full Fibre 1G,1,Full Fibre Broadband,Homes
-3,CityFibre Full Fibre 2G,1,Full Fibre Broadband,Homes
-4,Premium Full Fibre 5.5G,1,Full Fibre Broadband,Homes
-5,Smart WiFi Mesh for Homes,1,Full Fibre Broadband,Homes
-6,Home Voice over Fibre,1,Full Fibre Broadband,Homes
-7,Symmetric Home Pro 1G,1,Full Fibre Broadband,SMB
-8,Home Security Backhaul,1,Full Fibre Broadband,Homes
-9,Business Fibre DIA 1G,2,Business Internet & Ethernet,Enterprise
-10,Business Fibre DIA 10G,2,Business Internet & Ethernet,Enterprise
-11,Resilient Ethernet Pair,2,Business Internet & Ethernet,Enterprise
-12,National Ethernet Aggregation,2,Business Internet & Ethernet,Enterprise
+1,Virgin Media Fibre Broadband 250Mb,1,Home Broadband & WiFi,Homes
+2,Virgin Media Fibre Broadband 500Mb,1,Home Broadband & WiFi,Homes
+3,Virgin Media Gigabit Broadband 1Gb,1,Home Broadband & WiFi,Homes
+4,Virgin Media Multi-Gig Fibre 2Gb (trial),1,Home Broadband & WiFi,Homes
+5,WiFi Guarantee Pods,1,Home Broadband & WiFi,Homes
+6,Home Phone over Fibre,1,Home Broadband & WiFi,Homes
+7,Home Pro 1Gb + Mesh,1,Home Broadband & WiFi,SMB
+8,Virgin TV 360 Multiroom,1,Home Broadband & WiFi,Homes
+9,Voom Business Broadband 500Mb,2,Business Internet & Ethernet,Enterprise
+10,Voom Business Broadband 1Gb,2,Business Internet & Ethernet,Enterprise
+11,Dedicated Internet Access 1Gb,2,Business Internet & Ethernet,Enterprise
+12,Dedicated Internet Access 10Gb,2,Business Internet & Ethernet,Enterprise
 13,Cloud Connect for AWS,2,Business Internet & Ethernet,Enterprise
 14,Cloud Connect for Azure,2,Business Internet & Ethernet,Enterprise
 15,Cloud Connect for Google Cloud,2,Business Internet & Ethernet,Enterprise
-16,Metro Dark Fibre Pair,3,Dark Fibre & Backbone,Enterprise
-17,Long Haul Dark Fibre,3,Dark Fibre & Backbone,Enterprise
-18,Data Centre Cross Connect,3,Dark Fibre & Backbone,Enterprise
-19,Metro Ring Access,3,Dark Fibre & Backbone,Enterprise
-20,Resilient Backbone Spur,3,Dark Fibre & Backbone,Enterprise
-21,Small Cell Backhaul,4,Mobile & 5G Backhaul,Mobile
-22,Macro Tower Backhaul,4,Mobile & 5G Backhaul,Mobile
-23,Open RAN Fronthaul,4,Mobile & 5G Backhaul,Mobile
-24,Edge Data Centre Access,4,Mobile & 5G Backhaul,Mobile
-25,Emergency Services Network Backhaul,4,Mobile & 5G Backhaul,Public Sector
-26,Vodafone Wholesale FTTP,5,Wholesale Partner Access,Partner
-27,Sky Wholesale FTTP,5,Wholesale Partner Access,Partner
-28,TalkTalk Wholesale FTTP,5,Wholesale Partner Access,Partner
-29,Zen Wholesale FTTP,5,Wholesale Partner Access,Partner
-30,Cuckoo Wholesale FTTP,5,Wholesale Partner Access,Partner
-31,toob Wholesale FTTP,5,Wholesale Partner Access,Partner
-32,Business Wholesale Broadband Bundle,5,Wholesale Partner Access,Partner
-33,ISP Onboarding Accelerator,5,Wholesale Partner Access,Partner
-34,Local Authority Campus Fibre,6,Smart City & Public Sector,Public Sector
-35,School Modernisation Fibre,6,Smart City & Public Sector,Public Sector
-36,NHS Site Fibre Upgrade,6,Smart City & Public Sector,Public Sector
-37,CCTV & IoT Fibre Backbone,6,Smart City & Public Sector,Public Sector
-38,Smart Poles & Street Works Fibre,6,Smart City & Public Sector,Public Sector
-39,Public WiFi Backhaul,6,Smart City & Public Sector,Public Sector
-40,Transport Hub Fibre,6,Smart City & Public Sector,Public Sector
-41,Survey & Design Services,7,Professional Services,Enterprise
-42,Wayleave Management,7,Professional Services,Enterprise
-43,Civil Build Project Management,7,Professional Services,Enterprise
-44,Service Delivery Management,7,Professional Services,Enterprise
-45,Migration & Cutover Support,7,Professional Services,Enterprise
-46,Field Engineering Dispatch,7,Professional Services,Enterprise
-47,Incident Response Retainer,7,Professional Services,Enterprise
-48,Managed Router Service,8,Network Add-Ons,All
-49,DDoS Protection,8,Network Add-Ons,All
-50,Static IP Pack,8,Network Add-Ons,All
-51,4G/5G Failover,8,Network Add-Ons,All
-52,WiFi 6 Router Upgrade,8,Network Add-Ons,All
-53,Performance Monitoring & Insights,8,Network Add-Ons,All
-54,Partner Portal Access,9,Channel Partner Enablement,Partner
-55,Provisioning API Access,9,Channel Partner Enablement,Partner
-56,Joint Marketing Funds,9,Channel Partner Enablement,Partner
-57,Partner Training Programme,9,Channel Partner Enablement,Partner
-58,Technical Accreditation,9,Channel Partner Enablement,Partner
-59,Co-branded Installation Kits,9,Channel Partner Enablement,Partner
-60,Data Centre Connect London,10,Infrastructure Solutions,Enterprise
-61,Data Centre Connect Manchester,10,Infrastructure Solutions,Enterprise
-62,Data Centre Connect Glasgow,10,Infrastructure Solutions,Enterprise
-63,Cloud On-Ramp AWS Direct Connect,10,Infrastructure Solutions,Enterprise
-64,Cloud On-Ramp Azure ExpressRoute,10,Infrastructure Solutions,Enterprise
+16,Metro Dark Fibre Pair,3,Backbone & Dark Fibre,Enterprise
+17,Long Haul Dark Fibre,3,Backbone & Dark Fibre,Enterprise
+18,Data Centre Cross Connect,3,Backbone & Dark Fibre,Enterprise
+19,Metro Ring Access,3,Backbone & Dark Fibre,Enterprise
+20,Resilient Backbone Spur,3,Backbone & Dark Fibre,Enterprise
+21,5G SIM Only 200GB (30 day),4,Mobile & Backhaul,Mobile
+22,5G SIM Only Unlimited (12 month),4,Mobile & Backhaul,Mobile
+23,Phone + Plan 5G Bundle,4,Mobile & Backhaul,Mobile
+24,Mobile Broadband Data SIM,4,Mobile & Backhaul,Mobile
+25,Business Mobile APN & IoT SIM,4,Mobile & Backhaul,Public Sector
+26,Virgin Media Wholesale FTTH,5,Wholesale & Partner Access,Partner
+27,Wholesale FTTH - Sky Ireland,5,Wholesale & Partner Access,Partner
+28,Wholesale FTTH - Vodafone Ireland,5,Wholesale & Partner Access,Partner
+29,Wholesale FTTH - Regional ISP,5,Wholesale & Partner Access,Partner
+30,Wholesale FTTH - National ISP,5,Wholesale & Partner Access,Partner
+31,Wholesale Broadband Bundle,5,Wholesale & Partner Access,Partner
+32,ISP Onboarding Accelerator,5,Wholesale & Partner Access,Partner
+33,Local Authority Campus Fibre,6,Smart City & Public Sector,Public Sector
+34,School Modernisation Fibre,6,Smart City & Public Sector,Public Sector
+35,Healthcare Site Fibre Upgrade,6,Smart City & Public Sector,Public Sector
+36,CCTV & IoT Fibre Backbone,6,Smart City & Public Sector,Public Sector
+37,Smart Poles & Street Works Fibre,6,Smart City & Public Sector,Public Sector
+38,Public WiFi Backhaul,6,Smart City & Public Sector,Public Sector
+39,Transport Hub Fibre,6,Smart City & Public Sector,Public Sector
+40,Survey & Design Services,7,Professional & Managed Services,Enterprise
+41,Wayleave Management,7,Professional & Managed Services,Enterprise
+42,Civil Build Project Management,7,Professional & Managed Services,Enterprise
+43,Service Delivery Management,7,Professional & Managed Services,Enterprise
+44,Migration & Cutover Support,7,Professional & Managed Services,Enterprise
+45,Field Engineering Dispatch,7,Professional & Managed Services,Enterprise
+46,Incident Response Retainer,7,Professional & Managed Services,Enterprise
+47,Managed Router Service,8,Managed WiFi & Security,All
+48,DDoS Protection,8,Managed WiFi & Security,All
+49,Static IP Pack,8,Managed WiFi & Security,All
+50,4G/5G Failover,8,Managed WiFi & Security,All
+51,WiFi 6 Router Upgrade,8,Managed WiFi & Security,All
+52,Performance Monitoring & Insights,8,Managed WiFi & Security,All
+53,Partner Portal Access,9,Channel Partner Enablement,Partner
+54,Provisioning API Access,9,Channel Partner Enablement,Partner
+55,Joint Marketing Funds,9,Channel Partner Enablement,Partner
+56,Partner Training Programme,9,Channel Partner Enablement,Partner
+57,Technical Accreditation,9,Channel Partner Enablement,Partner
+58,Co-branded Installation Kits,9,Channel Partner Enablement,Partner
+59,Data Centre Connect Dublin,10,Cloud & Data Centre Access,Enterprise
+60,Data Centre Connect Cork,10,Cloud & Data Centre Access,Enterprise
+61,Data Centre Connect Galway,10,Cloud & Data Centre Access,Enterprise
+62,Cloud On-Ramp AWS Direct Connect,10,Cloud & Data Centre Access,Enterprise
+63,Cloud On-Ramp Azure ExpressRoute,10,Cloud & Data Centre Access,Enterprise
+64,Cloud On-Ramp Google Interconnect,10,Cloud & Data Centre Access,Enterprise
