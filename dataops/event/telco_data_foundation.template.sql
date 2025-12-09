@@ -204,6 +204,15 @@ CREATE OR REPLACE TABLE b2c_subscriptions (
     wifi_guarantee BOOLEAN
 ) COMMENT = 'Virgin Media Ireland B2C subscriptions with bundle details (demo)';
 
+-- City-level subscriber distribution (demo)
+CREATE OR REPLACE TABLE city_subs (
+    city VARCHAR(100) PRIMARY KEY,
+    broadband_subs INT,
+    tv_subs INT,
+    voice_subs INT,
+    mobile_subs INT
+) COMMENT = 'Illustrative city-level subscriber counts for broadband, TV, voice, and MVNO mobile';
+
 -- Sales Fact Table
 CREATE OR REPLACE TABLE sales_fact (
     sale_id INT PRIMARY KEY,
@@ -432,6 +441,12 @@ FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/b2c_subscript
 FILE_FORMAT = CSV_FORMAT
 ON_ERROR = 'CONTINUE';
 
+-- Load City-level subscriber distribution
+COPY INTO city_subs
+FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/city_subs.csv
+FILE_FORMAT = CSV_FORMAT
+ON_ERROR = 'CONTINUE';
+
 -- Load Virgin Media Ireland KPI Reference
 COPY INTO vmie_kpi
 FROM @{{ env.EVENT_DATA_STAGE | default('DATA_STAGE') }}/demo_data/vmie_kpi.csv
@@ -522,6 +537,8 @@ UNION ALL
 SELECT '', 'location_dim', COUNT(*) FROM location_dim
 UNION ALL
 SELECT '', 'b2c_customers', COUNT(*) FROM b2c_customers
+UNION ALL
+SELECT '', 'city_subs', COUNT(*) FROM city_subs
 UNION ALL
 SELECT '', '', NULL
 UNION ALL

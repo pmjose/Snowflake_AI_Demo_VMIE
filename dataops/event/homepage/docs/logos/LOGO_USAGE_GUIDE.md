@@ -1,19 +1,19 @@
-# CelcomDigi Logos for Snowflake Intelligence
+# Virgin Media Ireland Logos for Snowflake Intelligence
 
-This folder contains the CelcomDigi logo files needed to customize your Snowflake Intelligence interface.
+This folder contains the Virgin Media Ireland logo files needed to customize your Snowflake Intelligence interface.
 
 ## Files Available
 
 ### 1. Compact Logo (Icon/Avatar)
 - **celcomdigi_logo.png** (5.8KB)
-  - Compact version with CelcomDigi butterfly icon
+  - Compact version with Virgin Media Ireland butterfly icon
   - Blue and yellow brand colors
   - **Use for:** Icon field, agent avatar, small UI elements
   - **Dimensions:** Square/compact format
 
 ### 2. Full-Length Logo (Header/Banner)
 - **celcomdigi_logo_full.png** (16KB)
-  - Full-length CelcomDigi logo
+  - Full-length Virgin Media Ireland logo
   - Blue and yellow brand colors
   - **Use for:** Logo field, header, banner areas
   - **Dimensions:** Wide/horizontal format
@@ -48,7 +48,7 @@ This folder contains the CelcomDigi logo files needed to customize your Snowflak
 - Click **Upload** for Icon field  
 - Select **celcomdigi_logo.png** (compact version)
 
-### Apply CelcomDigi Brand Colors
+### Apply Virgin Media Ireland Brand Colors
 
 **Primary Color:** `#0078D7` (Blue)
 - Main buttons, highlights, primary UI elements
@@ -87,7 +87,7 @@ This folder contains the CelcomDigi logo files needed to customize your Snowflak
 
 ## Brand Guidelines
 
-**CelcomDigi Colors:**
+**Virgin Media Ireland Colors:**
 - **Blue**: #0078D7 (Primary - use for main elements)
 - **Yellow**: #FFCC00 (Secondary - use for accents)
 

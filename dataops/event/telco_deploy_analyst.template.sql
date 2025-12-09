@@ -223,6 +223,114 @@ CREATE OR REPLACE SEMANTIC VIEW MARKETING_SEMANTIC_VIEW
   with extension (CA='{"tables":[{"name":"ACCOUNTS","dimensions":[{"name":"ACCOUNT_ID"},{"name":"ACCOUNT_NAME"},{"name":"ACCOUNT_TYPE"},{"name":"ANNUAL_REVENUE"},{"name":"EMPLOYEES"},{"name":"INDUSTRY"},{"name":"SALES_CUSTOMER_KEY"}]},{"name":"CAMPAIGNS","dimensions":[{"name":"CAMPAIGN_DATE"},{"name":"CAMPAIGN_FACT_ID"},{"name":"CAMPAIGN_KEY"},{"name":"CAMPAIGN_MONTH"},{"name":"CAMPAIGN_YEAR"},{"name":"CHANNEL_KEY"},{"name":"PRODUCT_KEY"},{"name":"REGION_KEY"}],"facts":[{"name":"CAMPAIGN_RECORD"},{"name":"CAMPAIGN_SPEND"},{"name":"IMPRESSIONS"},{"name":"LEADS_GENERATED"}],"metrics":[{"name":"AVERAGE_SPEND"},{"name":"TOTAL_CAMPAIGNS"},{"name":"TOTAL_IMPRESSIONS"},{"name":"TOTAL_LEADS"},{"name":"TOTAL_SPEND"}]},{"name":"CAMPAIGN_DETAILS","dimensions":[{"name":"CAMPAIGN_KEY"},{"name":"CAMPAIGN_NAME"},{"name":"CAMPAIGN_OBJECTIVE"}]},{"name":"CHANNELS","dimensions":[{"name":"CHANNEL_KEY"},{"name":"CHANNEL_NAME"}]},{"name":"CONTACTS","dimensions":[{"name":"ACCOUNT_ID"},{"name":"CAMPAIGN_NO"},{"name":"CONTACT_ID"},{"name":"DEPARTMENT"},{"name":"EMAIL"},{"name":"FIRST_NAME"},{"name":"LAST_NAME"},{"name":"LEAD_SOURCE"},{"name":"OPPORTUNITY_ID"},{"name":"TITLE"}],"facts":[{"name":"CONTACT_RECORD"}],"metrics":[{"name":"TOTAL_CONTACTS"}]},{"name":"CONTACTS_FOR_OPPORTUNITIES"},{"name":"OPPORTUNITIES","dimensions":[{"name":"ACCOUNT_ID"},{"name":"CAMPAIGN_ID"},{"name":"CLOSE_DATE"},{"name":"OPPORTUNITY_ID"},{"name":"OPPORTUNITY_LEAD_SOURCE"},{"name":"OPPORTUNITY_NAME"},{"name":"OPPORTUNITY_STAGE","sample_values":["Closed Won","Perception Analysis","Qualification"]},{"name":"OPPORTUNITY_TYPE"},{"name":"SALES_SALE_ID"}],"facts":[{"name":"OPPORTUNITY_RECORD"},{"name":"REVENUE"}],"metrics":[{"name":"AVERAGE_DEAL_SIZE"},{"name":"CLOSED_WON_REVENUE"},{"name":"TOTAL_OPPORTUNITIES"},{"name":"TOTAL_REVENUE"}]},{"name":"PRODUCTS","dimensions":[{"name":"PRODUCT_CATEGORY"},{"name":"PRODUCT_KEY"},{"name":"PRODUCT_NAME"},{"name":"PRODUCT_VERTICAL"}]},{"name":"REGIONS","dimensions":[{"name":"REGION_KEY"},{"name":"REGION_NAME"}]}],"relationships":[{"name":"CAMPAIGNS_TO_CHANNELS","relationship_type":"many_to_one"},{"name":"CAMPAIGNS_TO_DETAILS","relationship_type":"many_to_one"},{"name":"CAMPAIGNS_TO_PRODUCTS","relationship_type":"many_to_one"},{"name":"CAMPAIGNS_TO_REGIONS","relationship_type":"many_to_one"},{"name":"CONTACTS_TO_ACCOUNTS","relationship_type":"many_to_one"},{"name":"CONTACTS_TO_CAMPAIGNS","relationship_type":"many_to_one"},{"name":"CONTACTS_TO_OPPORTUNITIES","relationship_type":"many_to_one"},{"name":"OPPORTUNITIES_TO_ACCOUNTS","relationship_type":"many_to_one"},{"name":"OPPORTUNITIES_TO_CAMPAIGNS"}],"verified_queries":[{"name":"include opps that turned in to sales deal","question":"include opps that turned in to sales deal","sql":"WITH campaign_impressions AS (\\n  SELECT\\n    c.campaign_key,\\n    cd.campaign_name,\\n    SUM(c.impressions) AS total_impressions\\n  FROM\\n    campaigns AS c\\n    LEFT OUTER JOIN campaign_details AS cd ON c.campaign_key = cd.campaign_key\\n  WHERE\\n    c.campaign_year = 2025\\n  GROUP BY\\n    c.campaign_key,\\n    cd.campaign_name\\n),\\ncampaign_opportunities AS (\\n  SELECT\\n    c.campaign_key,\\n    COUNT(o.opportunity_record) AS total_opportunities,\\n    COUNT(\\n      CASE\\n        WHEN o.opportunity_stage = ''Closed Won'' THEN o.opportunity_record\\n      END\\n    ) AS closed_won_opportunities\\n  FROM\\n    campaigns AS c\\n    LEFT OUTER JOIN opportunities AS o ON c.campaign_fact_id = o.campaign_id\\n  WHERE\\n    c.campaign_year = 2025\\n  GROUP BY\\n    c.campaign_key\\n)\\nSELECT\\n  ci.campaign_name,\\n  ci.total_impressions,\\n  COALESCE(co.total_opportunities, 0) AS total_opportunities,\\n  COALESCE(co.closed_won_opportunities, 0) AS closed_won_opportunities\\nFROM\\n  campaign_impressions AS ci\\n  LEFT JOIN campaign_opportunities AS co ON ci.campaign_key = co.campaign_key\\nORDER BY\\n  ci.total_impressions DESC NULLS LAST","use_as_onboarding_question":false,"verified_by":"Nick Akincilar","verified_at":1757262696}]}');
 
 -- ============================================================================
+-- KPI / CITY SUBS SEMANTIC VIEW
+-- ============================================================================
+
+CREATE OR REPLACE SEMANTIC VIEW KPI_SEMANTIC_VIEW
+  tables (
+    KPI as VMIE_KPI primary key (METRIC) with synonyms=('kpis','metrics','key performance indicators') comment='Virgin Media Ireland KPI metrics',
+    CITY_SUBS as CITY_SUBS primary key (CITY) with synonyms=('city subscribers','subs by city') comment='City-level subscribers for broadband, tv, voice, and MVNO mobile'
+  )
+  facts (
+    KPI.VALUE as kpi_value comment='KPI numeric value',
+    CITY_SUBS.BROADBAND_SUBS as broadband_subs comment='Broadband subscribers in city',
+    CITY_SUBS.TV_SUBS as tv_subs comment='TV subscribers in city',
+    CITY_SUBS.VOICE_SUBS as voice_subs comment='Voice subscribers in city',
+    CITY_SUBS.MOBILE_SUBS as mobile_subs comment='MVNO mobile subscribers in city'
+  )
+  dimensions (
+    KPI.METRIC as metric,
+    KPI.AS_OF_NOTE as as_of_note,
+    KPI.CATEGORY as category,
+    CITY_SUBS.CITY as city
+  )
+  comment='Semantic view for Virgin Media Ireland KPIs and city-level subscriber counts';
+
+-- ============================================================================
+-- B2C SUBSCRIPTIONS SEMANTIC VIEW
+-- ============================================================================
+
+CREATE OR REPLACE SEMANTIC VIEW B2C_SUBS_SEMANTIC_VIEW
+  tables (
+    CUSTOMERS as B2C_CUSTOMERS primary key (CUSTOMER_ID) with synonyms=('households','consumers') comment='B2C customers (households)',
+    SUBSCRIPTIONS as B2C_SUBSCRIPTIONS primary key (SUBSCRIPTION_ID) with synonyms=('plans','subscriptions','contracts') comment='B2C subscription records'
+  )
+  relationships (
+    SUBS_TO_CUSTOMERS as SUBSCRIPTIONS(CUSTOMER_ID) references CUSTOMERS(CUSTOMER_ID)
+  )
+  facts (
+    SUBSCRIPTIONS.MONTHLY_FEE_EUR as monthly_fee_eur comment='Monthly subscription fee in euros',
+    SUBSCRIPTIONS.MOBILE_SIMS as mobile_sims comment='Number of mobile SIMs on the subscription'
+  )
+  dimensions (
+    CUSTOMERS.CUSTOMER_ID as CUSTOMER_ID,
+    CUSTOMERS.FIRST_NAME as FIRST_NAME,
+    CUSTOMERS.LAST_NAME as LAST_NAME,
+    CUSTOMERS.CITY as CITY,
+    CUSTOMERS.COUNTY as COUNTY,
+    CUSTOMERS.EIRCODE as EIRCODE,
+    CUSTOMERS.PLAN_NAME as PLAN_NAME,
+    CUSTOMERS.SPEED_MBPS as SPEED_MBPS,
+    CUSTOMERS.BUNDLE as BUNDLE,
+    CUSTOMERS.TV_PACKAGE as TV_PACKAGE,
+    CUSTOMERS.WIFI_GUARANTEE as WIFI_GUARANTEE,
+    CUSTOMERS.ADD_ONS as ADD_ONS,
+    CUSTOMERS.STATUS as STATUS,
+    CUSTOMERS.REGION_KEY as REGION_KEY,
+    SUBSCRIPTIONS.SUBSCRIPTION_ID as SUBSCRIPTION_ID,
+    SUBSCRIPTIONS.PRODUCT_NAME as PRODUCT_NAME,
+    SUBSCRIPTIONS.CATEGORY_NAME as CATEGORY_NAME,
+    SUBSCRIPTIONS.START_DATE as START_DATE,
+    SUBSCRIPTIONS.STATUS as SUB_STATUS,
+    SUBSCRIPTIONS.TV_PACKAGE as SUB_TV_PACKAGE,
+    SUBSCRIPTIONS.WIFI_GUARANTEE as SUB_WIFI_GUARANTEE
+  )
+  comment='Semantic view for Virgin Media Ireland B2C customers and subscriptions (broadband/TV/mobile bundles)';
+
+-- ============================================================================
+-- B2B SUMMARY SEMANTIC VIEW
+-- ============================================================================
+
+CREATE OR REPLACE SEMANTIC VIEW B2B_SUMMARY_SEMANTIC_VIEW
+  tables (
+    CUSTOMERS as CUSTOMER_DIM primary key (CUSTOMER_KEY) with synonyms=('accounts','customers','clients') comment='B2B/B2G customers',
+    PRODUCTS as PRODUCT_DIM primary key (PRODUCT_KEY) with synonyms=('products','services') comment='Product catalog',
+    REGIONS as REGION_DIM primary key (REGION_KEY) with synonyms=('regions','markets','territories') comment='Regions in Ireland',
+    SALES as SALES_FACT primary key (SALE_ID) with synonyms=('transactions','sales') comment='B2B sales transactions',
+    ACCOUNTS as SF_ACCOUNTS primary key (ACCOUNT_ID) with synonyms=('sf accounts','crm accounts') comment='Salesforce account records'
+  )
+  relationships (
+    SALES_TO_CUSTOMERS as SALES(CUSTOMER_KEY) references CUSTOMERS(CUSTOMER_KEY),
+    SALES_TO_PRODUCTS as SALES(PRODUCT_KEY) references PRODUCTS(PRODUCT_KEY),
+    SALES_TO_REGIONS as SALES(REGION_KEY) references REGIONS(REGION_KEY),
+    ACCOUNTS_TO_CUSTOMERS as ACCOUNTS(CUSTOMER_KEY) references CUSTOMERS(CUSTOMER_KEY)
+  )
+  facts (
+    SALES.AMOUNT as revenue_eur comment='Sales revenue in euros',
+    SALES.UNITS as units_sold comment='Units sold'
+  )
+  dimensions (
+    CUSTOMERS.CUSTOMER_KEY as CUSTOMER_KEY,
+    CUSTOMERS.CUSTOMER_NAME as CUSTOMER_NAME,
+    CUSTOMERS.INDUSTRY as INDUSTRY,
+    CUSTOMERS.VERTICAL as VERTICAL,
+    REGIONS.REGION_KEY as REGION_KEY,
+    REGIONS.REGION_NAME as REGION_NAME,
+    PRODUCTS.PRODUCT_KEY as PRODUCT_KEY,
+    PRODUCTS.PRODUCT_NAME as PRODUCT_NAME,
+    PRODUCTS.CATEGORY_NAME as PRODUCT_CATEGORY,
+    PRODUCTS.VERTICAL as PRODUCT_VERTICAL,
+    SALES.SALE_ID as SALE_ID,
+    SALES.DATE as SALE_DATE,
+    SALES.SALE_YEAR as SALE_YEAR,
+    SALES.SALE_MONTH as SALE_MONTH,
+    ACCOUNTS.ACCOUNT_ID as ACCOUNT_ID,
+    ACCOUNTS.ACCOUNT_NAME as ACCOUNT_NAME,
+    ACCOUNTS.ACCOUNT_TYPE as ACCOUNT_TYPE
+  )
+  comment='Summary semantic view for Virgin Media Ireland B2B/B2G revenue and units by customer, product, and region';
+
+-- ============================================================================
 -- HR SEMANTIC VIEW
 -- ============================================================================
 

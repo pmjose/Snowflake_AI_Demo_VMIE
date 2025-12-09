@@ -6,4 +6,6 @@ Net_Adds_H1_2025,45000,Mid-year net adds (illustrative),sales
 Financing_Raised_EUR,500000000,Illustrative fibre investment,finance
 Top_Speed_Mbps,5000,Full-fibre headline speed,product
 WiFi_Guarantee_Coverage_Pct,82,Customers with mesh/WiFi guarantee (illustrative),product
+Mobile_Subscribers,130000,Virgin Media Ireland MVNO mobile subs (illustrative, aligned to public scale),mobile
+Mobile_5G_Penetration_Pct,55,Percent of mobile base on 5G-capable plans/devices (MVNO on host network),mobile
 

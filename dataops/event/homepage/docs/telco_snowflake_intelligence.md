@@ -206,7 +206,7 @@ As you ask questions, notice:
 
 - Ask variations of the sample questions
 - Try follow-up questions like "Can you show me more details?" or "What about other regions?"
-- Combine topics: "Show me customer feedback about network issues in Kuala Lumpur"
+- Combine topics: "Show me customer feedback about network issues in Dublin"
 - Test edge cases to understand the agent's capabilities and limitations
 
 ### <h1sub>Tips for Best Results</h1sub>
@@ -227,7 +227,7 @@ Here's an example of how a conversation might flow:
 **Agent:** *Searches `CALL_TRANSCRIPT_SEARCH` and identifies network quality and billing as top issues for Premium segment.*
 
 **You:** *"Show me the revenue impact of at-risk Premium customers."*  
-**Agent:** *Queries structured data again to calculate total monthly revenue at risk: $2.3M.*
+**Agent:** *Queries structured data again to calculate total monthly revenue at risk: €2.3M.*
 
 **You:** *"What specific network issues are they mentioning?"*  
 **Agent:** *Returns top themes: 5G coverage gaps, slow data speeds, dropped calls in urban areas.*

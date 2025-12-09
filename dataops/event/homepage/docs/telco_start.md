@@ -96,7 +96,7 @@ This lab is organized into these sections:
 
 - **AI_TRANSCRIBE**: Converts MP3 call recordings to text with speaker identification
 - **AI_SENTIMENT**: Analyzes emotional tone of customer interactions
-- **AI_PARSE_DOCUMENT**: Extracts text from CelcomDigi PDF documentation
+- **AI_PARSE_DOCUMENT**: Extracts text from Virgin Media Ireland PDF documentation
 - **AI_TRANSLATE**: Translates content to multiple languages
 - **AI_EXTRACT**: Structures unstructured data for analysis
 
@@ -258,7 +258,7 @@ Everything is set up and ready to go! Click **Run Notebooks** in the navigation 
 - **Use Case**: Call Center Operations & Customer Experience
 - **Technologies**: Cortex AI, Snowflake Intelligence, Document AI, Audio AI
 - **Deployment**: Automated via DataOps.live pipeline
-- **Data**: Synthetic CelcomDigi Malaysia call center data
+- **Data**: Synthetic Virgin Media Ireland call center data
 
 ---
 

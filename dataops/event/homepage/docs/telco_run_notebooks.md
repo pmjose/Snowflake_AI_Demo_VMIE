@@ -35,7 +35,7 @@ This notebook loads data from stages and processes it with Cortex AI.
 **Part 3: Process PDF Documents (Cell 7)**
 - Finds all PDF files in `@raw_files/pdfs/` directory
 - Uses `AI_PARSE_DOCUMENT` to extract text from PDFs
-- Processes CelcomDigi help documentation
+- Processes Virgin Media Ireland help documentation
 - Saves to `customer_complaint_documents` table
 
 **Part 4: Verify Data Loading (Cell 9)**

@@ -40,6 +40,8 @@ PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sf_contacts.cs
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/sf_opportunities.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/b2c_customers.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/b2c_subscriptions.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/vmie_kpi.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
+PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/city_subs.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 PUT 'file://{{ env.CI_PROJECT_DIR }}/dataops/event/DATA/demo_data/vendor_dim.csv' @DATA_STAGE/demo_data/ AUTO_COMPRESS=FALSE OVERWRITE=TRUE;
 
 -- ============================================================================

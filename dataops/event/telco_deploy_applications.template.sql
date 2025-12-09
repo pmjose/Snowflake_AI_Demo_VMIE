@@ -365,6 +365,27 @@ FROM SPECIFICATION $$
     },
     {
       "tool_spec": {
+        "type": "cortex_analyst_text_to_sql",
+        "name": "Query KPI Datamart",
+        "description": "Query Virgin Media Ireland KPI and subscriber metrics: broadband, TV, voice, mobile (MVNO) totals, city-level subs, WiFi Guarantee, and 5G penetration."
+      }
+    },
+    {
+      "tool_spec": {
+        "type": "cortex_analyst_text_to_sql",
+        "name": "Query B2C Subscriptions",
+        "description": "Query Virgin Media Ireland B2C customers and subscriptions: broadband/TV/mobile bundles, SIM counts, WiFi guarantee adoption, and EUR monthly fees."
+      }
+    },
+    {
+      "tool_spec": {
+        "type": "cortex_analyst_text_to_sql",
+        "name": "Query B2B Summary",
+        "description": "Query Virgin Media Ireland B2B/B2G revenue and units by customer, product, and region."
+      }
+    },
+    {
+      "tool_spec": {
         "type": "cortex_search",
         "name": "Search Internal Documents: Finance",
         "description": "Search Virgin Media Ireland finance documents: high-level accounts, fibre investment summaries, ARPU/ARPA analysis, unit economics, partner revenue mix, ESG notes, and vendor contracts."
@@ -500,6 +521,15 @@ FROM SPECIFICATION $$
     },
     "Query Sales Datamart": {
       "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.SALES_SEMANTIC_VIEW"
+    },
+    "Query KPI Datamart": {
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.KPI_SEMANTIC_VIEW"
+    },
+    "Query B2C Subscriptions": {
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.B2C_SUBS_SEMANTIC_VIEW"
+    },
+    "Query B2B Summary": {
+      "semantic_view": "{{ env.EVENT_DATABASE | default('VIRGIN_MEDIA_IE_AI_DEMO') }}.{{ env.EVENT_SCHEMA | default('VIRGIN_MEDIA_IE_SCHEMA') }}.B2B_SUMMARY_SEMANTIC_VIEW"
     },
     "Search Internal Documents: Finance": {
       "id_column": "FILE_URL",
