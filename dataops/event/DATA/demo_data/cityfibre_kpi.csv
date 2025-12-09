@@ -1,0 +1,9 @@
+metric,value,as_of_note,category
+Premises_Ready_For_Service,4600000,June 2025 (Mid-year Update),network
+Premises_Target,8000000,Target from 2025 financing plan,network
+Consumer_Customers_Connected,620000,H1 2025 (Mid-year Update),sales
+Net_Adds_H1_2025,102000,H1 2025 (Mid-year Update),sales
+Financing_Raised_GBP,2300000000,July 2025 financing round,finance
+Top_Speed_Mbps,5500,Website headline speed,product
+Reliability_vs_FTTC,5,Up to 5x more reliable vs FTTC (website claim),product
+

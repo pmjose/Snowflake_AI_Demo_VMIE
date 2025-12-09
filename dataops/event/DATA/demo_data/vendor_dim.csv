@@ -1,0 +1,51 @@
+vendor_key,vendor_name,vertical,address,city,county,postcode
+1,Microsoft UK,Platform Partner,2 Kingdom Street,London,Greater London,W2 6BD
+2,Cisco UK,Network Equipment,Bedfont Lakes,Feltham,Middlesex,TW14 8HA
+3,Amazon Web Services UK,Cloud Provider,60 Holborn Viaduct,London,Greater London,EC1A 2FD
+4,Google Cloud UK,Cloud Provider,6 Pancras Square,London,Greater London,N1C 4AG
+5,Poly UK,Hardware Partner,Pinewood Studios,Iver Heath,Buckinghamshire,SL0 0NH
+6,Yealink UK,Hardware Partner,31 Enterprise Way,London,Greater London,EC2A 4NE
+7,Jabra UK,Hardware Partner,Langstone Road,Langley,Berkshire,SL3 8DS
+8,Snom UK,Hardware Partner,45 Technology Park,Watford,Hertfordshire,WD18 8YS
+9,Grandstream UK,Hardware Partner,22 Commercial Road,London,Greater London,EC1V 2NB
+10,BT Openreach,Connectivity Provider,81 Newgate Street,London,Greater London,EC1A 7AJ
+11,CityFibre,Connectivity Provider,15 Bedford Street,London,Greater London,WC2E 9HE
+12,Virgin Media Business,Connectivity Provider,500 Brook Drive,Reading,Berkshire,RG2 6UU
+13,TalkTalk Business,Connectivity Provider,11 Evesham Street,London,Greater London,W11 4AR
+14,Vodafone Business,Connectivity Provider,1 Kingdom Street,London,Greater London,W2 6BY
+15,Neutral Host Mobile Partner,Mobile Backhaul Partner,5 Fleet Place,London,Greater London,EC4M 7RD
+16,Salesforce UK,CRM Partner,110 Bishopsgate,London,Greater London,EC2N 4AY
+17,HubSpot UK,CRM Partner,6th Floor One Lyric Square,London,Greater London,W6 0NB
+18,Zendesk UK,CX Platform,25 Wilton Road,London,Greater London,SW1V 1LW
+19,ServiceNow UK,ITSM Partner,Strata House,London,Greater London,WC2H 9JQ
+20,Twilio UK,CPaaS Partner,17 Bevis Marks,London,Greater London,EC3A 7LN
+21,Bandwidth UK,Voice Provider,82 Innovation Drive,Reading,Berkshire,RG2 6GP
+22,Pexip UK,Video Partner,15 Appold Street,London,Greater London,EC2A 2NE
+23,Zoom UK,Video Partner,60 Cheapside,London,Greater London,EC2V 6AX
+24,Mitel UK,UCaaS Partner,Uxbridge Business Park,Uxbridge,Middlesex,UB8 1DH
+25,Ribbon Communications,Voice Provider,5 George Road,Edgbaston,Birmingham,B15 1NP
+26,Sangoma UK,Voice Systems,45 Business Park,Bracknell,Berkshire,RG12 1NN
+27,Oracle UK,Software Partner,1 South Place,London,Greater London,EC2M 2RB
+28,SAP UK,Software Partner,Clockhouse Place,Feltham,Middlesex,TW14 8HD
+29,Dell Technologies UK,Hardware Partner,Dell House,Bracknell,Berkshire,RG12 1LF
+30,HP UK,Hardware Partner,88 Wood Street,London,Greater London,EC2V 7RS
+31,Lenovo UK,Hardware Partner,25 Canada Square,London,Greater London,E14 5LQ
+32,Unify UK,UCaaS Partner,The Bower,London,Greater London,E1 6JJ
+33,Avaya UK,Contact Centre,2 Pancras Square,London,Greater London,N1C 4AG
+34,NICE UK,Contact Centre,18 Fleet Place,London,Greater London,EC4M 7RD
+35,Genesys UK,Contact Centre,90 High Holborn,London,Greater London,WC1V 6LJ
+36,Five9 UK,Contact Centre,125 Kingsway,London,Greater London,WC2B 6NH
+37,Talkdesk UK,Contact Centre,40 Holborn Viaduct,London,Greater London,EC1N 2PB
+38,Content Guru,Contact Centre,24 Old Queen Street,London,Greater London,SW1H 9HP
+39,Cirrus Response,Contact Centre,Epworth House,Leeds,West Yorkshire,LS1 4DY
+40,8x8 UK,UCaaS Competitor,28 Cannon Street,London,Greater London,EC4M 6XH
+41,RingCentral UK,UCaaS Competitor,60 Victoria Embankment,London,Greater London,EC4Y 0JP
+42,Vonage UK,UCaaS Competitor,23 Savile Row,London,Greater London,W1S 2ET
+43,Dialpad UK,UCaaS Competitor,41 Eastcheap,London,Greater London,EC3M 1DT
+44,GoTo UK,UCaaS Competitor,100 New Bridge Street,London,Greater London,EC4V 6JA
+45,Fortinet UK,Security Partner,410 Thames Valley Park,Reading,Berkshire,RG6 1PL
+46,Palo Alto Networks UK,Security Partner,5 Canada Square,London,Greater London,E14 5AQ
+47,CrowdStrike UK,Security Partner,45 Gresham Street,London,Greater London,EC2V 7BG
+48,SentinelOne UK,Security Partner,32 London Bridge Street,London,Greater London,SE1 9SG
+49,Sophos UK,Security Partner,The Pentagon,Abingdon,Oxfordshire,OX14 3YP
+50,Darktrace UK,Security Partner,Maurice Wilkes Building,Cambridge,Cambridgeshire,CB4 0DS

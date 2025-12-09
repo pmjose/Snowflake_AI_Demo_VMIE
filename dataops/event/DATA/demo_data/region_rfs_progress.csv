@@ -1,0 +1,14 @@
+region_key,region_name,premises_rfs,takeup_pct,avg_install_days,data_as_of
+400,London & South East,1200000,0.145,12,June 2025
+401,Midlands,720000,0.132,14,June 2025
+402,North West,680000,0.118,13,June 2025
+403,Yorkshire & Humber,520000,0.109,15,June 2025
+404,North East,310000,0.104,16,June 2025
+405,Scotland Central Belt,410000,0.121,15,June 2025
+406,Scotland North,190000,0.096,18,June 2025
+407,Wales,260000,0.101,17,June 2025
+408,Northern Ireland,180000,0.088,18,June 2025
+409,South West,370000,0.107,16,June 2025
+410,East of England,330000,0.112,14,June 2025
+411,National Backbone,0,0.000,0,June 2025
+
